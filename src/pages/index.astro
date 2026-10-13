@@ -1,0 +1,82 @@
+---
+import { profile, publications } from '../data/profile';
+import '../styles/global.css';
+
+const hasPlaceholders = publications.some((paper) => paper.placeholder);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={profile.description} />
+    <meta name="theme-color" content="#f7f7f5" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/iAWriterDuoS-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{profile.name}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <header class="site-header">
+        <a class="home-mark" href="#main" aria-label={`${profile.name}, home`}>WH<span aria-hidden="true">.</span></a>
+        <nav aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="about" id="about" aria-labelledby="name">
+          <p class="eyebrow">Academic homepage</p>
+          <h1 id="name">{profile.name}<span class="caret" aria-hidden="true"></span></h1>
+          <p class="affiliation">{profile.role}<span class="separator" aria-hidden="true"> / </span>{profile.affiliation}</p>
+
+          <div class="biography">
+            {profile.introduction.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+
+          <ul class="profile-links" aria-label="Profile links">
+            {profile.links.filter((link) => link.href).map((link) => (
+              <li><a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a></li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="research" id="research" aria-labelledby="research-heading">
+          <div class="section-heading">
+            <h2 id="research-heading">Research</h2>
+            <span class="section-note">Selected work</span>
+          </div>
+          {hasPlaceholders && <p class="draft-note">Draft layout — the entries below are placeholders.</p>}
+          <ol class="publications">
+            {publications.map((paper, index) => (
+              <li class="publication">
+                <span class="paper-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <article>
+                  <h3>{paper.title}</h3>
+                  <p class="authors">{paper.authors.map((author, authorIndex) => (
+                    <>{authorIndex > 0 && ', '}{author === profile.name ? <strong>{author}</strong> : author}</>
+                  ))}</p>
+                  <p class="venue">{paper.venue}<span aria-hidden="true"> · </span>{paper.year}</p>
+                  <p class="paper-description">{paper.description}</p>
+                  {paper.links.length > 0 && (
+                    <ul class="paper-links" aria-label={`Links for ${paper.title}`}>
+                      {paper.links.map((link) => <li><a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a></li>)}
+                    </ul>
+                  )}
+                </article>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </main>
+
+      <footer>
+        <span>{profile.name}</span>
+        <span class="font-credit">Typeset in <a href="https://github.com/iaolo/iA-Fonts">iA Writer Duo</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
