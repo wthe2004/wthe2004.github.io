@@ -22,6 +22,7 @@ npm run preview # Preview the production build
 - Set profile link `href` values to enable them. For email use `mailto:you@example.edu`; for a CV put the file in `public/` and use `/cv.pdf`.
 - Each publication accepts links such as `{ label: 'Paper', href: 'https://...' }`. Remove `placeholder: true` after replacing an example with a real publication.
 - `src/styles/global.css`: colors, spacing, and typography.
+- `src/assets/avatar.jpg`: profile photo, optimized by Astro when building.
 - `src/pages/index.astro`: page structure and metadata.
 
 This initial version is local only; no deployment workflow is installed. The Astro `site` setting is prepared for `https://wthe2004.github.io`.

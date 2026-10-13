@@ -1,8 +1,11 @@
 ---
 import { profile, publications } from '../data/profile';
 import '../styles/global.css';
+import { Image } from 'astro:assets';
+import avatar from '../assets/avatar.jpg';
+import regularFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
+import boldFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-normal.woff2?url';
 
-const hasPlaceholders = publications.some((paper) => paper.placeholder);
 ---
 
 <!doctype html>
@@ -13,24 +16,22 @@ const hasPlaceholders = publications.some((paper) => paper.placeholder);
     <meta name="description" content={profile.description} />
     <meta name="theme-color" content="#f7f7f5" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={regularFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={boldFont} as="font" type="font/woff2" crossorigin />
     <title>{profile.name}</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="page">
-      <header class="site-header">
-        <a class="home-mark" href="#main" aria-label={`${profile.name}, home`}>WH<span aria-hidden="true">.</span></a>
-        <nav aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#research">Research</a>
-        </nav>
-      </header>
-
       <main id="main">
         <section class="about" id="about" aria-labelledby="name">
-          <p class="eyebrow">Academic homepage</p>
+          <div class="profile-heading">
+          <div>
           <h1 id="name">{profile.name}<span class="caret" aria-hidden="true"></span></h1>
           <p class="affiliation">{profile.role}<span class="separator" aria-hidden="true"> / </span>{profile.affiliation}</p>
+          </div>
+          <Image class="avatar" src={avatar} alt={`Portrait of ${profile.name}`} width={210} height={210} widths={[128, 210, 256, 420]} sizes="(max-width: 600px) 128px, 210px" loading="eager" />
+          </div>
 
           <div class="biography">
             {profile.introduction.map((paragraph) => <p>{paragraph}</p>)}
@@ -46,9 +47,7 @@ const hasPlaceholders = publications.some((paper) => paper.placeholder);
         <section class="research" id="research" aria-labelledby="research-heading">
           <div class="section-heading">
             <h2 id="research-heading">Research</h2>
-            <span class="section-note">Selected work</span>
           </div>
-          {hasPlaceholders && <p class="draft-note">Draft layout — the entries below are placeholders.</p>}
           <ol class="publications">
             {publications.map((paper, index) => (
               <li class="publication">
@@ -73,7 +72,7 @@ const hasPlaceholders = publications.some((paper) => paper.placeholder);
       </main>
 
       <footer>
-        <span>{profile.name}</span>
+        <span>{profile.name} · Last updated August 2026</span>
       </footer>
     </div>
   </body>

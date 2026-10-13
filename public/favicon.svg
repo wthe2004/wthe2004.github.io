@@ -1,1 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#f7f7f5"/><text x="10" y="43" font-family="monospace" font-size="35" fill="#242424">w</text><path d="M48 19v27" stroke="#00b9e2" stroke-width="4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- IBM Plex Mono Bold outlines; font license: /fonts/LICENSE.txt -->
+  <defs>
+    <linearGradient id="letter-gradient" gradientUnits="userSpaceOnUse" x1="61" y1="0" x2="1073.3684210526317" y2="0">
+      <stop offset="0" stop-color="#242424"/>
+      <stop offset="1" stop-color="#6b9e3f"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="10" fill="#f7f7f5"/>
+  <g transform="translate(6.22828 47.85786) scale(0.0454380 -0.0454380)">
+    <path fill="url(#letter-gradient)" d="M388 292H212V0H61V698H212V415H388V698H539V0H388ZM627.3684210526316 0V698H1073.3684210526317V575H777.3684210526316V415H1063.3684210526317V292H777.3684210526316V123H1073.3684210526317V0Z"/>
+  </g>
+</svg>
