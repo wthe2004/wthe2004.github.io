@@ -1,6 +1,6 @@
 # Academic homepage
 
-A small static Astro homepage with iA Writer Duo typography. Requires Node.js 22.12 or newer.
+A small static Astro homepage with IBM Plex Mono typography. Requires Node.js 22.12 or newer.
 
 ## Local development
 
@@ -28,4 +28,4 @@ This initial version is local only; no deployment workflow is installed. The Ast
 
 ## Font attribution
 
-Typeset in [iA Writer Duo](https://github.com/iaolo/iA-Fonts), by iA, based on IBM Plex. Fonts are self-hosted in `public/fonts/`; the upstream license is included alongside them.
+Typeset in [IBM Plex Mono](https://github.com/IBM/plex), distributed under the SIL Open Font License. Regular and bold Latin fonts are self-hosted through `@fontsource/ibm-plex-mono`; the license is also included in `public/fonts/LICENSE.txt`.
