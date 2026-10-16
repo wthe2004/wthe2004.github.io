@@ -1,11 +1,34 @@
 ---
+import { execFileSync } from 'node:child_process';
 import { profile, publications } from '../data/profile';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
 import avatar from '../assets/avatar.jpg';
-import regularFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
+import PhysicsPreview from '../components/PhysicsPreview.astro';
 import boldFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-normal.woff2?url';
+import regularFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
 
+// Runs on the server in development and at build time for the static site.
+let lastUpdated: { iso: string; label: string } | undefined;
+try {
+  const iso = execFileSync('git', ['log', '-1', '--format=%cI'], {
+    cwd: process.cwd(),
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  }).trim();
+  const date = new Date(iso);
+  if (!Number.isNaN(date.getTime())) {
+    lastUpdated = {
+      iso,
+      label: new Intl.DateTimeFormat('en-US', {
+        month: 'long', year: 'numeric', timeZone: 'America/Detroit',
+      }).format(date),
+    };
+  }
+} catch {
+  // Source archives may lack Git metadata; omit the date rather than invent one.
+  console.warn('Last updated omitted: Git commit metadata is unavailable.');
+}
 ---
 
 <!doctype html>
@@ -29,12 +52,17 @@ import boldFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-no
           <div>
           <h1 id="name">{profile.name}<span class="caret" aria-hidden="true"></span></h1>
           <p class="affiliation">{profile.role}<span class="separator" aria-hidden="true"> / </span>{profile.affiliation}</p>
+
           </div>
           <Image class="avatar" src={avatar} alt={`Portrait of ${profile.name}`} width={210} height={210} widths={[128, 210, 256, 420]} sizes="(max-width: 600px) 128px, 210px" loading="eager" />
           </div>
 
           <div class="biography">
-            {profile.introduction.map((paragraph) => <p>{paragraph}</p>)}
+            {profile.introduction.map((paragraph) => (
+              <p>{paragraph.map((segment) => segment.href
+                ? <a href={segment.href}>{segment.text}</a>
+                : segment.text)}</p>
+            ))}
           </div>
 
           <ul class="profile-links" aria-label="Profile links">
@@ -46,25 +74,34 @@ import boldFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-no
 
         <section class="research" id="research" aria-labelledby="research-heading">
           <div class="section-heading">
-            <h2 id="research-heading">Research</h2>
+            <h2 id="research-heading">Publications &amp; Preprints</h2>
           </div>
           <ol class="publications">
-            {publications.map((paper, index) => (
+            {publications.map((paper) => (
               <li class="publication">
-                <span class="paper-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+
                 <article>
-                  <h3>{paper.title}</h3>
+                  <h3><a href={paper.titleHref}>{paper.title}</a></h3>
                   <p class="authors">{paper.authors.map((author, authorIndex) => (
-                    <>{authorIndex > 0 && ', '}{author === profile.name ? <strong>{author}</strong> : author}</>
+                    <>{authorIndex > 0 && ', '}{author === profile.name ? <strong>{author}</strong> : author}{paper.authorMarks?.[author] && <sup>{paper.authorMarks[author]}</sup>}</>
                   ))}</p>
-                  <p class="venue">{paper.venue}<span aria-hidden="true"> · </span>{paper.year}</p>
+                  {paper.authorNote && <p class="author-note">{paper.authorNote}</p>}
+                  <div class="paper-meta">
+                    <span class="venue">{paper.venue}{paper.year && <>, {paper.year}</>}</span>
+                    {paper.links.map((link) => (
+                      <><span class="meta-dot" aria-hidden="true">·</span><a href={link.href}>{link.label}</a></>
+                    ))}
+                  </div>
                   <p class="paper-description">{paper.description}</p>
-                  {paper.links.length > 0 && (
-                    <ul class="paper-links" aria-label={`Links for ${paper.title}`}>
-                      {paper.links.map((link) => <li><a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a></li>)}
-                    </ul>
-                  )}
                 </article>
+                <a class="paper-thumbnail" href={paper.titleHref}>
+                  {paper.diagram === 'physics' ? <PhysicsPreview /> : (
+                  <picture>
+                    {paper.animation && <source media="(prefers-reduced-motion: no-preference)" srcset={paper.animation} type="image/gif" />}
+                    <Image src={paper.image} alt={paper.imageAlt} width={paper.image.width} height={paper.image.height} widths={[180, 360, 540, 720]} sizes="240px" loading="lazy" />
+                  </picture>
+                  )}
+                </a>
               </li>
             ))}
           </ol>
@@ -72,7 +109,7 @@ import boldFont from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-no
       </main>
 
       <footer>
-        <span>{profile.name} · Last updated August 2026</span>
+        <span>{profile.name}{lastUpdated && <> · Last updated <time datetime={lastUpdated.iso}>{lastUpdated.label}</time></>}</span>
       </footer>
     </div>
   </body>
