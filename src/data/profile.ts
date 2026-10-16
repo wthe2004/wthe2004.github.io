@@ -13,7 +13,7 @@ export const profile = {
   name: 'Wentao He',
   role: "Master's student",
   affiliation: 'University of Michigan School of Information',
-  email: '',
+  email: 'wentaohe@umich.edu',
   description: "Wentao He is a master's student at the University of Michigan School of Information, working with Nima Fazeli and JJ (Jeong Joon) Park.",
   introduction: [
     [
@@ -32,7 +32,7 @@ export const profile = {
     ],
   ] satisfies BiographySegment[][],
   links: [
-    { label: 'Email', href: '' },
+    { label: 'Email: wentaohe [at] umich [dot] edu', href: 'mailto:wentaohe@umich.edu' },
     { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=6iFVV7YAAAAJ&hl=en' },
     { label: 'GitHub', href: 'https://github.com/wthe2004' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/wthe2004/' },
