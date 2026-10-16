@@ -52,6 +52,11 @@ try {
           <div>
           <h1 id="name">{profile.name}<span class="caret" aria-hidden="true"></span></h1>
           <p class="profile-email">Email: <a href={`mailto:${profile.email}`}>{profile.email.replace('@', ' [at] ').replaceAll('.', ' [dot] ')}</a></p>
+          <ul class="profile-links" aria-label="Profile links">
+            {profile.links.filter((link) => link.href).map((link) => (
+              <li><a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a></li>
+            ))}
+          </ul>
           <p class="affiliation">{profile.role}<span class="separator" aria-hidden="true"> / </span>{profile.affiliation}</p>
 
           </div>
@@ -66,11 +71,7 @@ try {
             ))}
           </div>
 
-          <ul class="profile-links" aria-label="Profile links">
-            {profile.links.filter((link) => link.href).map((link) => (
-              <li><a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a></li>
-            ))}
-          </ul>
+
         </section>
 
         <section class="research" id="research" aria-labelledby="research-heading">
