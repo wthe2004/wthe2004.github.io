@@ -51,6 +51,7 @@ try {
           <div class="profile-heading">
           <div>
           <h1 id="name">{profile.name}<span class="caret" aria-hidden="true"></span></h1>
+          <p class="profile-email">Email: <a href={`mailto:${profile.email}`}>{profile.email.replace('@', ' [at] ').replaceAll('.', ' [dot] ')}</a></p>
           <p class="affiliation">{profile.role}<span class="separator" aria-hidden="true"> / </span>{profile.affiliation}</p>
 
           </div>

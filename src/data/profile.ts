@@ -32,7 +32,6 @@ export const profile = {
     ],
   ] satisfies BiographySegment[][],
   links: [
-    { label: 'Email: wentaohe [at] umich [dot] edu', href: 'mailto:wentaohe@umich.edu' },
     { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=6iFVV7YAAAAJ&hl=en' },
     { label: 'GitHub', href: 'https://github.com/wthe2004' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/wthe2004/' },
