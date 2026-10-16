@@ -72,7 +72,7 @@ export const publications: Publication[] = [
   },
   {
     title: 'GBC: Generalized Behavior-Cloning Framework for Whole-Body Humanoid Imitation',
-    titleHref: 'https://github.com/sjtu-mvasl-robotics/GBC',
+    titleHref: 'https://sjtu-mvasl-robotics.github.io/gbc/',
     image: gbcImage,
     imageAlt: 'GBC: two robot poses above their corresponding human reference poses.',
     authors: ['Yifei Yao', 'Chengyuan Luo', 'Jiaheng Du', 'Wentao He', 'Jun-Guo Lu'],
@@ -80,13 +80,14 @@ export const publications: Publication[] = [
     year: '2025',
     description: 'A unified framework for motion retargeting and whole-body imitation learning across different humanoid robots.',
     links: [
+      { label: 'Project', href: 'https://sjtu-mvasl-robotics.github.io/gbc/' },
       { label: 'arXiv', href: 'https://arxiv.org/abs/2508.09960' },
       { label: 'Code', href: 'https://github.com/sjtu-mvasl-robotics/GBC' },
     ],
   },
   {
     title: 'AnyBipe: An Automated End-to-End Framework for Training and Deploying Bipedal Robots Powered by Large Language Models',
-    titleHref: 'https://github.com/sjtu-mvasl-robotics/AnyBipe',
+    titleHref: 'https://sjtu-mvasl-robotics.github.io/anybipe/',
     image: anybipeImage,
     animation: '/anybipe-demo.gif',
     imageAlt: 'AnyBipe: a real bipedal robot walking on grass.',
@@ -95,6 +96,7 @@ export const publications: Publication[] = [
     year: '2025',
     description: 'An LLM-guided framework connecting reward design, reinforcement learning, and sim-to-real evaluation for bipedal robot locomotion.',
     links: [
+      { label: 'Project', href: 'https://sjtu-mvasl-robotics.github.io/anybipe/' },
       { label: 'arXiv', href: 'https://arxiv.org/abs/2409.08904' },
       { label: 'Code', href: 'https://github.com/sjtu-mvasl-robotics/AnyBipe' },
     ],
