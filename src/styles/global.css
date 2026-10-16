@@ -79,4 +79,4 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
 
 .profile-email { font-size: 13px; color: var(--muted); margin-bottom: 12px; overflow-wrap: anywhere; }
 
-.profile-heading .profile-links { margin: 0 0 16px; }
+.profile-heading .profile-links { margin: 0 0 16px; font-family: inherit; font-size: 13px; color: var(--muted); }
