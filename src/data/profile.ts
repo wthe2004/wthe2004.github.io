@@ -49,6 +49,7 @@ export interface Publication {
   authors: string[];
   authorMarks?: Record<string, string>;
   authorNote?: string;
+  featured?: boolean;
   venue: string;
   year: string;
   description: string;
@@ -65,6 +66,7 @@ export const publications: Publication[] = [
     authors: ['Yunhao Luo', 'Wentao He', 'Yinpei Dai', 'Hyelin Nam', 'Hongze Fu', 'Joyce Chai', 'Nima Fazeli', 'Jeong Joon Park'],
     authorMarks: { 'Yunhao Luo': '*', 'Wentao He': '*', 'Nima Fazeli': '†', 'Jeong Joon Park': '†' },
     authorNote: '* Equal contribution · † Equal advising',
+    featured: true,
     venue: 'ICLR · Under review',
     year: '',
     description: 'Calibrating world models to the physics of a new scene through in-context interaction, without fine-tuning or physics labels.',

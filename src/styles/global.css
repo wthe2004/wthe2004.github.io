@@ -42,6 +42,7 @@ h2 { font-size: 20px; line-height: 1.5; margin: 0; font-weight: 400; }
 .publications { list-style: none; padding: 0; margin: 0; }
 .publication { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 28px; align-items: center; padding-block: 25px; }
 .publication + .publication { border-top: 1px solid var(--rule); }
+.publication-featured { border-left: 2px solid var(--accent); padding-left: 18px; margin-left: -20px; }
 h3 { font-size: 17px; line-height: 1.65; font-weight: 700; margin-bottom: 10px; }
 .authors, .venue { font-size: 13px; line-height: 1.9; color: var(--muted); margin-bottom: 3px; }
 .authors strong { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: #b3b3ad; text-underline-offset: 3px; }
@@ -63,6 +64,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1
   .separator { padding-inline: 2px; }
   .research { margin-top: 56px; }
   .publication { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-block: 27px; }
+  .publication-featured { padding-left: 12px; margin-left: -14px; }
   .paper-thumbnail { width: min(100%, 240px); }
   h3 { font-size: 15px; }
   .authors, .venue { font-size: 12px; }

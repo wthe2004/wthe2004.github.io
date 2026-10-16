@@ -80,7 +80,7 @@ try {
           </div>
           <ol class="publications">
             {publications.map((paper) => (
-              <li class="publication">
+              <li class:list={['publication', { 'publication-featured': paper.featured }]}>
 
                 <article>
                   <h3><a href={paper.titleHref}>{paper.title}</a></h3>
