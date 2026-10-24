@@ -70,7 +70,7 @@ export const publications: Publication[] = [
     venue: 'ICLR · Under review',
     year: '',
     description: 'Calibrating world models to the physics of a new scene through in-context interaction, without fine-tuning or physics labels.',
-    links: [{ label: 'Project', href: 'https://physical-world.github.io/' }],
+    links: [{ label: 'Website', href: 'https://physical-world.github.io/' }],
   },
   {
     title: 'GBC: Generalized Behavior-Cloning Framework for Whole-Body Humanoid Imitation',
@@ -82,7 +82,7 @@ export const publications: Publication[] = [
     year: '2025',
     description: 'A unified framework for motion retargeting and whole-body imitation learning across different humanoid robots.',
     links: [
-      { label: 'Project', href: 'https://sjtu-mvasl-robotics.github.io/gbc/' },
+      { label: 'Website', href: 'https://sjtu-mvasl-robotics.github.io/gbc/' },
       { label: 'arXiv', href: 'https://arxiv.org/abs/2508.09960' },
       { label: 'Code', href: 'https://github.com/sjtu-mvasl-robotics/GBC' },
     ],
@@ -98,7 +98,8 @@ export const publications: Publication[] = [
     year: '2025',
     description: 'An LLM-guided framework connecting reward design, reinforcement learning, and sim-to-real evaluation for bipedal robot locomotion.',
     links: [
-      { label: 'Project', href: 'https://sjtu-mvasl-robotics.github.io/anybipe/' },
+      { label: 'Website', href: 'https://sjtu-mvasl-robotics.github.io/anybipe/' },
+      { label: 'Paper', href: 'https://ieeexplore.ieee.org/document/11246492' },
       { label: 'arXiv', href: 'https://arxiv.org/abs/2409.08904' },
       { label: 'Code', href: 'https://github.com/sjtu-mvasl-robotics/AnyBipe' },
     ],
