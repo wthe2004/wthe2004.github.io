@@ -37,7 +37,15 @@ try {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={profile.description} />
-    <meta name="theme-color" content="#f7f7f5" />
+    <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1b1b1b" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      // Apply a saved theme before first paint to avoid a flash of the wrong palette.
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href={regularFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={boldFont} as="font" type="font/woff2" crossorigin />
@@ -112,7 +120,32 @@ try {
 
       <footer>
         <span>{profile.name}{lastUpdated && <> · Last updated <time datetime={lastUpdated.iso}>{lastUpdated.label}</time></>}</span>
+        <button class="theme-toggle" type="button" hidden>Dark mode</button>
       </footer>
     </div>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const button = document.querySelector('.theme-toggle');
+        const systemDark = matchMedia('(prefers-color-scheme: dark)');
+        const current = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+        const render = () => {
+          const theme = current();
+          button.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+          document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+            meta.content = theme === 'dark' ? '#1b1b1b' : '#f7f7f5';
+          });
+        };
+        button.addEventListener('click', () => {
+          const next = current() === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch {}
+          render();
+        });
+        systemDark.addEventListener('change', render);
+        render();
+        button.hidden = false;
+      })();
+    </script>
   </body>
 </html>
